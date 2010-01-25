@@ -14,7 +14,8 @@ Gem::Specification.new do |s|
     "Rakefile",
      "extconf.rb",
      "xapian-bindings-1.1.3.tar.gz",
-     "xapian-core-1.1.3.tar.gz"
+     "xapian-core-1.1.3.tar.gz",
+     "xapian-full.gemspec",
   ]
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
