@@ -11,7 +11,8 @@ Gem::Specification.new do |s|
   s.email = %q{rlane@club.cc.cmu.edu}
   s.extensions = ["Rakefile"]
   s.files = [
-    "Rakefile",
+     "lib/xapian.rb",
+     "Rakefile",
      "xapian-bindings-1.1.3.tar.gz",
      "xapian-core-1.1.3.tar.gz",
      "xapian-full.gemspec",
