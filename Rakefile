@@ -1,26 +1,34 @@
-require 'rubygems'
-require 'rake'
-require 'rubygems/ext'
+require 'rbconfig'
+c = Config::CONFIG
 
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gem|
-    gem.name = "xapian-full"
-    gem.version = '1.1.3'
-    gem.summary = %Q{xapian-core + Ruby xapian-bindings}
-    gem.description = %Q{Xapian bindings for Ruby without dependency on system Xapian library}
-    gem.email = "rlane@club.cc.cmu.edu"
-    #gem.homepage = "http://gitorious.org/holizz-projects/xapian-ruby"
-    gem.authors = ["Tom Adams", "Rich Lane"]
+def system!(cmd)
+	puts cmd
+	system(cmd) or raise
+end
 
-    gem.files += Dir.glob(%w[
-			extconf.rb
-			Rakefile
-			xapian*.tar.gz
-    ])
+ver = '1.1.3'
+core = "xapian-core-#{ver}"
+bindings = "xapian-bindings-#{ver}"
+xapian_config = "#{Dir.pwd}/#{core}/xapian-config"
 
-    gem.extensions << 'extconf.rb'
-  end
-rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install jeweler"
+task :default do
+	[core,bindings].each do |x|
+		system! "tar -xzvf #{x}.tar.gz"
+	end
+
+	Dir.chdir core do
+		system! "./configure"
+		system! "make clean all"
+	end
+
+	Dir.chdir bindings do
+		ENV['RUBY'] ||= "#{c['bindir']}/#{c['RUBY_INSTALL_NAME']}"
+		ENV['XAPIAN_CONFIG'] = xapian_config
+		system! "./configure --with-ruby"
+		system! "make clean all"
+	end
+
+	system! "mkdir -p lib"
+	system! "cp #{bindings}/ruby/.libs/_xapian.so lib"
+	system! "cp #{bindings}/ruby/xapian.rb lib"
 end

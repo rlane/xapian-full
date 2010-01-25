@@ -9,10 +9,9 @@ Gem::Specification.new do |s|
   s.date = %q{2009-12-21}
   s.description = %q{Xapian bindings for Ruby without dependency on system Xapian library}
   s.email = %q{rlane@club.cc.cmu.edu}
-  s.extensions = ["extconf.rb"]
+  s.extensions = ["Rakefile"]
   s.files = [
     "Rakefile",
-     "extconf.rb",
      "xapian-bindings-1.1.3.tar.gz",
      "xapian-core-1.1.3.tar.gz",
      "xapian-full.gemspec",
