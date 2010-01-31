@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{xapian-full}
-  s.version = "1.1.3.1"
+  s.version = "1.1.3.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Adams", "Rich Lane"]

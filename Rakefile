@@ -29,6 +29,6 @@ task :default do
 	end
 
 	system! "mkdir -p lib"
-	system! "cp #{bindings}/ruby/.libs/_xapian.so lib"
+	system! "cp #{bindings}/ruby/.libs/_xapian.* lib"
 	system! "cp #{bindings}/ruby/xapian.rb lib"
 end
