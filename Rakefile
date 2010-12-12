@@ -24,6 +24,7 @@ task :default do
 	Dir.chdir bindings do
 		ENV['RUBY'] ||= "#{c['bindir']}/#{c['RUBY_INSTALL_NAME']}"
 		ENV['XAPIAN_CONFIG'] = xapian_config
+		ENV['LDFLAGS'] = "-R #{Dir.pwd}/lib"
 		system! "./configure --with-ruby"
 		system! "make clean all"
 	end
