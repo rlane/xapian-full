@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{xapian-full}
-  s.version = "1.1.3.2"
+  s.version = "1.2.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tom Adams", "Rich Lane"]
@@ -13,8 +13,8 @@ Gem::Specification.new do |s|
   s.files = [
      "lib/xapian.rb",
      "Rakefile",
-     "xapian-bindings-1.1.3.tar.gz",
-     "xapian-core-1.1.3.tar.gz",
+     "xapian-bindings-1.2.3.tar.gz",
+     "xapian-core-1.2.3.tar.gz",
      "xapian-full.gemspec",
   ]
   s.rdoc_options = ["--charset=UTF-8"]
