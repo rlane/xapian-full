@@ -16,20 +16,26 @@ task :default do
 		system! "tar -xzvf #{x}.tar.gz"
 	end
 
+	prefix = Dir.pwd
+	ENV['LDFLAGS'] = "-R#{prefix}/lib"
+
+	system! "mkdir -p lib"
+
 	Dir.chdir core do
-		system! "./configure"
+		system! "./configure --prefix=#{prefix} --exec-prefix=#{prefix}"
 		system! "make clean all"
+		system! "cp -r .libs/* ../lib/"
 	end
+
+	
 
 	Dir.chdir bindings do
 		ENV['RUBY'] ||= "#{c['bindir']}/#{c['RUBY_INSTALL_NAME']}"
 		ENV['XAPIAN_CONFIG'] = xapian_config
-		ENV['LDFLAGS'] = "-R #{Dir.pwd}/lib"
-		system! "./configure --with-ruby"
+		system! "./configure --prefix=#{prefix} --exec-prefix=#{prefix} --with-ruby"
 		system! "make clean all"
 	end
 
-	system! "mkdir -p lib"
-	system! "cp #{bindings}/ruby/.libs/_xapian.* lib"
+	system! "cp -r #{bindings}/ruby/.libs/_xapian.* lib"
 	system! "cp #{bindings}/ruby/xapian.rb lib"
 end
