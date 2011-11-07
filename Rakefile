@@ -17,7 +17,9 @@ task :default do
 	end
 
 	prefix = Dir.pwd
-	ENV['LDFLAGS'] = "-R#{prefix}/lib"
+  if c['target_os'] =~ /darwin/i
+	  ENV['LDFLAGS'] = "-R#{prefix}/lib"
+  end
 
 	system! "mkdir -p lib"
 
@@ -26,8 +28,6 @@ task :default do
 		system! "make clean all"
 		system! "cp -r .libs/* ../lib/"
 	end
-
-	
 
 	Dir.chdir bindings do
 		ENV['RUBY'] ||= "#{c['bindir']}/#{c['RUBY_INSTALL_NAME']}"
