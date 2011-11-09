@@ -17,15 +17,14 @@ task :default do
 	end
 
 	prefix = Dir.pwd
-  if c['target_os'] =~ /darwin/i
-	  ENV['LDFLAGS'] = "-R#{prefix}/lib"
-  end
 
 	system! "mkdir -p lib"
 
 	Dir.chdir core do
 		system! "./configure --prefix=#{prefix} --exec-prefix=#{prefix}"
+		ENV['LDFLAGS'] = "-R#{prefix}/lib"
 		system! "make clean all"
+		ENV['LDFLAGS'] = ""
 		system! "cp -r .libs/* ../lib/"
 	end
 
@@ -33,7 +32,9 @@ task :default do
 		ENV['RUBY'] ||= "#{c['bindir']}/#{c['RUBY_INSTALL_NAME']}"
 		ENV['XAPIAN_CONFIG'] = xapian_config
 		system! "./configure --prefix=#{prefix} --exec-prefix=#{prefix} --with-ruby"
+		ENV['LDFLAGS'] = "-R#{prefix}/lib"
 		system! "make clean all"
+		ENV['LDFLAGS'] = ""
 	end
 
 	system! "cp -r #{bindings}/ruby/.libs/_xapian.* lib"
