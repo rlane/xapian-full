@@ -6,7 +6,7 @@ def system!(cmd)
 	system(cmd) or raise
 end
 
-ver = '1.2.3'
+ver = '1.2.9'
 core = "xapian-core-#{ver}"
 bindings = "xapian-bindings-#{ver}"
 xapian_config = "#{Dir.pwd}/#{core}/xapian-config"
@@ -25,7 +25,7 @@ task :default do
 		ENV['LDFLAGS'] = "-R#{prefix}/lib"
 		system! "make clean all"
 		ENV['LDFLAGS'] = ""
-		system! "cp -r .libs/* ../lib/"
+		system! "cp -rL .libs/* ../lib/"
 	end
 
 	Dir.chdir bindings do
