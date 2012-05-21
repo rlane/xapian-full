@@ -37,6 +37,6 @@ task :default do
 		ENV['LDFLAGS'] = ""
 	end
 
-	system! "cp -R #{bindings}/ruby/.libs/_xapian.* lib"
+	system! "cp -RL #{bindings}/ruby/.libs/_xapian.* lib"
 	system! "cp #{bindings}/ruby/xapian.rb lib"
 end
