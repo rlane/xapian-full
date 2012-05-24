@@ -25,7 +25,7 @@ task :default do
 		ENV['LDFLAGS'] = "-R#{prefix}/lib"
 		system! "make clean all"
 		ENV['LDFLAGS'] = ""
-		system! "cp -rL .libs/* ../lib/"
+		system! "cp -RL .libs/* ../lib/"
 	end
 
 	Dir.chdir bindings do
@@ -37,6 +37,6 @@ task :default do
 		ENV['LDFLAGS'] = ""
 	end
 
-	system! "cp -r #{bindings}/ruby/.libs/_xapian.* lib"
+	system! "cp -RL #{bindings}/ruby/.libs/_xapian.* lib"
 	system! "cp #{bindings}/ruby/xapian.rb lib"
 end
